@@ -20,5 +20,4 @@ public class User {
     private String firstname;
     private String lastname;
     private int age;
-    private String pseudo;
 }
