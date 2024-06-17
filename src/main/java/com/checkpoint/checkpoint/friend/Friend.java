@@ -1,7 +1,6 @@
-package com.checkpoint.checkpoint.user;
+package com.checkpoint.checkpoint.friend;
 
-import com.checkpoint.checkpoint.friend.Friend;
-import com.checkpoint.checkpoint.wish.Wish;
+import com.checkpoint.checkpoint.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -10,12 +9,10 @@ import lombok.RequiredArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Data
 @RequiredArgsConstructor
 @Entity
-public class User {
-
+public class Friend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +21,9 @@ public class User {
     private String lastname;
     private int age;
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")
-    private List<Wish> booking = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("friends")
+    private List<User> users = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "users")
-    @JsonIgnoreProperties("users")
-    private List<Friend> friends = new ArrayList<>();
+
 }
